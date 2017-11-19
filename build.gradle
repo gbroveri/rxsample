@@ -1,0 +1,43 @@
+group 'com.ifd'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'menu'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // tag::jetty[]
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    // end::jetty[]
+    compile("io.reactivex.rxjava2:rxjava:2.1.6")
+    compileOnly("org.projectlombok:lombok:1.16.8")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    // tag::spock[]
+    testCompile("org.spockframework:spock-spring:1.0-groovy-2.4")
+    testCompile("cglib:cglib-nodep:3.2.5")
+    // end::spock[]
+}

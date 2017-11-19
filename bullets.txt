@@ -1,0 +1,16 @@
+1. Lack of business definition. It becomes harder to practice DDD.
+2. Data model specification. Some low level entities specs and no business domain ones.
+3. Assumptions on menu apis. Only read api was specified.
+4. Email is used as customer identification for discounts which exploits a vulnerability since its easy for someone to test a huge email database against better discounts.
+5. Some scenarios are not relevant on FindMenu spec since it's expected the data is denormalized on database:
+    5.1 "find menu from restaurant that is not part of a chain"()
+    5.2 "find menu from restaurant that inherits chain menu"()
+    5.3 "find menu from restaurant that inherits and overrides chain menu items"()
+6. Auth on managing APIs is going to be implemented latter with API tokens.
+7. Price is modeled as "Long" since it' easier to support multi currency.
+8. The details on how are the rules to pick items and optionals may impact data modeling.
+9. Discounts must be further detailed with business. For now, it' only possible to have the discount percent effect on all menu items.
+10. The promotion contract may be refined with it's feature team.
+11. It's assumed that promotion takes care of vouchers but it could be handled by it's micro service.
+12. There should be a data model change on items that had promotions applied for tracking/auditing purposes. It' going to be implemented in future releases.
+13. "find menu with day of the week offer applied" scenario was not covered because this case is supposed to be handled by promotions micro service and it's discount is going to be applied transparently by menu.

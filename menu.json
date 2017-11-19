@@ -1,0 +1,147 @@
+{
+  "restaurant": {
+    "id": "chips_n_burger_1",
+    "chain": "chips n burgers",
+    "name": "chips n burgers campinas mall 1",
+    "menus": [
+      {
+        "name": "fast food menu",
+        "items": [
+          {
+            "type": "regular",
+            "name": "Chips",
+            "price": 400,
+            "optionals": [
+              {
+                "name": "Bacon",
+                "price": 100,
+                "group": "chips adds"
+              }
+            ]
+          },
+          {
+            "type": "regular",
+            "name": "Cola",
+            "price": 300
+          },
+          {
+            "type": "regular",
+            "name": "Double Cheese Burger",
+            "price": 1200,
+            "optionals": [
+              {
+                "name": "Salad",
+                "price": 0,
+                "group": "sandwich adds"
+              },
+              {
+                "name": "Extra burger",
+                "price": 300,
+                "group": "sandwich adds"
+              },
+              {
+                "name": "Bacon",
+                "price": 200,
+                "group": "sandwich adds"
+              }
+            ]
+          },
+          {
+            "type": "combo",
+            "name": "Combo 5",
+            "price": 1700,
+            "items": [
+              {
+                "name": "Double Cheese Burger",
+                "price": 1200,
+                "optionals": [
+                  {
+                    "name": "Salad",
+                    "price": 0,
+                    "group": "sandwich adds"
+                  },
+                  {
+                    "name": "Extra burger",
+                    "price": 300,
+                    "group": "sandwich adds"
+                  },
+                  {
+                    "name": "Bacon",
+                    "price": 200,
+                    "group": "sandwich adds"
+                  }
+                ]
+              },
+              {
+                "type": "group",
+                "name": "Side dish",
+                "price": 0,
+                "pick": 1,
+                "items": [
+                  {
+                    "type": "regular",
+                    "name": "Onion rings",
+                    "price": 100
+                  },
+                  {
+                    "type": "regular",
+                    "name": "chips",
+                    "price": 0,
+                    "optionals": [
+                      {
+                        "name": "Bacon",
+                        "price": 100,
+                        "group": "chips adds"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "group",
+                "name": "Beverage",
+                "price": 0,
+                "pick": 1,
+                "items": [
+                  {
+                    "type": "group",
+                    "name": "Soda",
+                    "items": [
+                      {
+                        "name": "Cola",
+                        "type": "regular",
+                        "price": 0
+                      },
+                      {
+                        "name": "Dr Pepper",
+                        "type": "regular",
+                        "price": 0
+                      }
+                    ]
+                  },
+                  {
+                    "type": "group",
+                    "name": "Juice",
+                    "price": 100,
+                    "items": [
+                      {
+                        "name": "Orange",
+                        "type": "regular",
+                        "price": 100
+                      },
+                      {
+                        "name": "Lemon",
+                        "type": "regular",
+                        "price": 100
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
