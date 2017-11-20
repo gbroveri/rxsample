@@ -3,33 +3,25 @@ package com.ifd.menu.usecases;
 import com.ifd.menu.domains.*;
 import com.ifd.menu.gateways.RestaurantGateway;
 import io.reactivex.Observable;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class FindMenu {
 
     private final RestaurantGateway restaurantGateway;
     private final FindPromotions findPromotions;
 
-    @Autowired
-    public FindMenu(
-        final RestaurantGateway restaurantGateway,
-        final FindPromotions findPromotions) {
-
-        this.restaurantGateway = restaurantGateway;
-        this.findPromotions = findPromotions;
-    }
-
     public Observable<Restaurant> execute(final String restaurantId, final IfdContext context) {
         final Promotion promotion =
             findPromotions.execute(restaurantId, context).singleElement().blockingGet(new Promotion());
-        final Observable<Restaurant> restaurantObservable = restaurantGateway.findById(restaurantId);
+        final Observable<Restaurant> restaurantObservable = restaurantGateway.findById(restaurantId).toObservable();
         if (promotion != null) {
             restaurantObservable.flatMapIterable(restaurant -> restaurant.getMenus())
                 .flatMapIterable(menu -> menu.getItems())
                 .flatMap(menuItem -> getMenuItems(menuItem))
-                .forEach(menuItem -> applyDiscount(menuItem, promotion));
+                .subscribe(menuItem -> applyDiscount(menuItem, promotion));
         }
         return restaurantObservable;
     }

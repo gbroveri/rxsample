@@ -2,6 +2,7 @@ package com.ifd.menu.usecases
 
 import com.ifd.menu.domains.*
 import com.ifd.menu.gateways.RestaurantGateway
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.observers.TestObserver
 import spock.lang.Specification
@@ -15,12 +16,12 @@ class FindMenuSpec extends Specification {
     def "find restaurant menu with regular and combo items"() {
         given: "there is a menu for restaurant chips_n_burger_1 with 4 items"
           def mock = sampleRestaurant()
-          restaurantGateway.findById("chips_n_burger_1") >> Observable.just(mock)
+          restaurantGateway.findById("chips_n_burger_1") >> Maybe.just(mock)
           findPromotions.execute(_, _) >> Observable.empty()
         when: "a search by chips_n_burger_1 menus is performed"
           def restaurant = findMenu.execute("chips_n_burger_1", new IfdContext())
         then: "the menu with 4 items is returned"
-          final TestObserver<String> observer = new TestObserver<>()
+          final TestObserver observer = new TestObserver<>()
           restaurant.subscribe(observer)
           observer.assertComplete()
           observer.assertNoErrors()
@@ -31,13 +32,13 @@ class FindMenuSpec extends Specification {
     def "find restaurant menu from customer with discount"() {
         given: "there is a menu for restaurant chips_n_burger_1 with 4 items"
           def mock = sampleRestaurant()
-          restaurantGateway.findById("chips_n_burger_1") >> Observable.just(mock)
+          restaurantGateway.findById("chips_n_burger_1") >> Maybe.just(mock)
         and: "user john@doe.com has a promotion 'special_customer' that takes 10% off"
           findPromotions.execute(_, _) >> Observable.just(new Promotion(discount: 10))
         when: "a search is performed by user john@doe.com"
           def restaurant = findMenu.execute("chips_n_burger_1", new IfdContext(uid: "john@doe.com"))
         then: "all menu items have the price with 10% off"
-          final TestObserver<String> observer = new TestObserver<>()
+          final TestObserver observer = new TestObserver<>()
           restaurant.subscribe(observer)
           observer.assertComplete()
           observer.assertNoErrors()
@@ -53,13 +54,13 @@ class FindMenuSpec extends Specification {
     def "find restaurant menus from source partner with discount"() {
         given: "there is a menu for restaurant chips_n_burger_1 with 4 items"
           def mock = sampleRestaurant()
-          restaurantGateway.findById("chips_n_burger_1") >> Observable.just(mock)
+          restaurantGateway.findById("chips_n_burger_1") >> Maybe.just(mock)
         and: "source facebook has a promotion 'facebook_specials' that gives 20% off"
           findPromotions.execute(_, _) >> Observable.just(new Promotion(discount: 20))
         when: "a search is performed from source facebook"
           def restaurant = findMenu.execute("chips_n_burger_1", new IfdContext(source: "facebook"))
         then: "all menu items have the price with 20% off"
-          final TestObserver<String> observer = new TestObserver<>()
+          final TestObserver observer = new TestObserver<>()
           restaurant.subscribe(observer)
           observer.assertComplete()
           observer.assertNoErrors()
@@ -75,13 +76,13 @@ class FindMenuSpec extends Specification {
     def "find menu with voucher applied"() {
         given: "there is a menu for restaurant chips_n_burger_1 with 4 items"
           def mock = sampleRestaurant()
-          restaurantGateway.findById("chips_n_burger_1") >> Observable.just(mock)
+          restaurantGateway.findById("chips_n_burger_1") >> Maybe.just(mock)
         and: "voucher XPTO has a promotion that gives 20% off"
           findPromotions.execute(_, _) >> Observable.just(new Promotion(discount: 20))
         when: "a search is performed with voucher XPTO in context"
           def restaurant = findMenu.execute("chips_n_burger_1", new IfdContext(voucher: "XPTO"))
         then: "all menu items have the price with 20% off"
-          final TestObserver<String> observer = new TestObserver<>()
+          final TestObserver observer = new TestObserver<>()
           restaurant.subscribe(observer)
           observer.assertComplete()
           observer.assertNoErrors()
@@ -98,12 +99,12 @@ class FindMenuSpec extends Specification {
         given: "exists restaurant chips_n_burger_1 with but without items on menu"
           def mock = sampleRestaurant()
           mock.menus = []
-          restaurantGateway.findById("chips_n_burger_1") >> Observable.just(mock)
+          restaurantGateway.findById("chips_n_burger_1") >> Maybe.just(mock)
           findPromotions.execute(_, _) >> Observable.empty()
         when: "a search is performed by restaurant chips_n_burger_1"
           def restaurant = findMenu.execute("chips_n_burger_1", new IfdContext(voucher: "XPTO"))
         then: "restaurant details is returned without menus"
-          final TestObserver<String> observer = new TestObserver<>()
+          final TestObserver observer = new TestObserver<>()
           restaurant.subscribe(observer)
           observer.assertComplete()
           observer.assertNoErrors()
@@ -112,16 +113,16 @@ class FindMenuSpec extends Specification {
 
     def "find menu from invalid restaurant"() {
         given: "restaurant chips_n_burger_1 does not exist"
-          restaurantGateway.findById("chips_n_burger_1") >> Observable.empty()
+          restaurantGateway.findById("chips_n_burger_1") >> Maybe.empty()
           findPromotions.execute(_, _) >> Observable.empty()
         when: "a search is performed by restaurant chips_n_burger_1"
           def restaurant = findMenu.execute("chips_n_burger_1", new IfdContext(voucher: "XPTO"))
-        then: "restaurant details is returned without menus"
-          final TestObserver<String> observer = new TestObserver<>()
+        then: "no restaurant is returned"
+          final TestObserver observer = new TestObserver<>()
           restaurant.subscribe(observer)
           observer.assertComplete()
           observer.assertNoErrors()
-          observer.values() isEmpty()
+          observer.values().isEmpty()
     }
 
     def sampleRestaurant() {

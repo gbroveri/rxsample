@@ -1,8 +1,8 @@
 package com.ifd.menu.gateways;
 
 import com.ifd.menu.domains.Restaurant;
-import io.reactivex.Observable;
+import io.reactivex.Maybe;
 
 public interface RestaurantGateway {
-    Observable<Restaurant> findById(String restaurantId);
+    Maybe<Restaurant> findById(String restaurantId);
 }

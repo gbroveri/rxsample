@@ -14,3 +14,4 @@
 11. It's assumed that promotion takes care of vouchers but it could be handled by it's micro service.
 12. There should be a data model change on items that had promotions applied for tracking/auditing purposes. It' going to be implemented in future releases.
 13. "find menu with day of the week offer applied" scenario was not covered because this case is supposed to be handled by promotions micro service and it's discount is going to be applied transparently by menu.
+14. It' assumed data is consistent on database, so that there are almost no negative scenarios covered.
