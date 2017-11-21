@@ -17,7 +17,7 @@ public class RestaurantConverter {
             final Restaurant restaurant = new Restaurant();
             final Collection<Menu> menus = new ArrayList<>();
             restaurant.setMenus(menus);
-            BeanUtils.copyProperties(restaurantMongo, restaurant);
+            BeanUtils.copyProperties(restaurantMongo, restaurant, "menus");
             Observable.fromIterable(restaurantMongo.getMenus())
                 .subscribe(menuMongo -> menus.add(menuConverter().convert(menuMongo)));
             if (restaurantMongo.getChain() != null) {
