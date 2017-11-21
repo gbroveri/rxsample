@@ -18,3 +18,5 @@
 15. It's assumed data is consistent on database, so that there are almost no negative scenarios covered (for business rules).
 16. Error handling is still in progress. The proper parser of bundle messages will be implemented on http (gateway) layer.
 17. Specific environment properties are going to be provided latter with devops team.
+18. Restaurant domain is returned from the web gateway layer (http). It's ok by clean architecture since it's a core domain and all layers could have access to it.
+In production code it's recommended to have it's own layer pojo, similar to "documents" pojos for mongodb.

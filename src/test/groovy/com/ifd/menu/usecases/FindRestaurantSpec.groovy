@@ -7,11 +7,11 @@ import io.reactivex.Observable
 import io.reactivex.observers.TestObserver
 import spock.lang.Specification
 
-class FindMenuSpec extends Specification {
+class FindRestaurantSpec extends Specification {
 
     def restaurantGateway = Mock(RestaurantGateway)
     def findPromotions = Mock(FindPromotions)
-    def findMenu = new FindMenu(restaurantGateway, findPromotions)
+    def findMenu = new FindRestaurant(restaurantGateway, findPromotions)
 
     def "find restaurant menu with regular and combo items"() {
         given: "there is a menu for restaurant chips_n_burger_1 with 4 items"

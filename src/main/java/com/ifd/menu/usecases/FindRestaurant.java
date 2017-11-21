@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class FindMenu {
+public class FindRestaurant {
 
     private final RestaurantGateway restaurantGateway;
     private final FindPromotions findPromotions;

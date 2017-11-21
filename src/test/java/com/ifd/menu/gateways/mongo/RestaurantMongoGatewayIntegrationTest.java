@@ -30,7 +30,7 @@ public class RestaurantMongoGatewayIntegrationTest {
 
     @Before
     public void setUp() {
-        operations.collectionExists(Restaurant.class) //
+        operations.collectionExists(RestaurantMongo.class) //
             .flatMap(exists -> exists ? operations.dropCollection(RestaurantMongo.class) : Mono.just(exists))
             .flatMap(o -> operations.createCollection(RestaurantMongo.class))
             .then()
