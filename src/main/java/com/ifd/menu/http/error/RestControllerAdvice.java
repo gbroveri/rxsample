@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
-import javax.servlet.http.HttpServletResponse;
-
 @ControllerAdvice
 @Slf4j
 public class RestControllerAdvice extends DefaultHandlerExceptionResolver {
 
     @ExceptionHandler(NotFoundException.class)
-    public void handleNotFound(final HttpServletResponse response, final Throwable ex) {
+    public ResponseEntity<ErrorResponse> handleNotFound(final Throwable ex) {
         log.warn(ex.getMessage(), ex);
-        response.setStatus(404);
+        final ErrorResponse error = new ErrorResponse();
+        error.setMsg("not found");
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Throwable.class)

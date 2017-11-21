@@ -14,15 +14,27 @@ public class FindRestaurant {
     private final FindPromotions findPromotions;
 
     public Observable<Restaurant> execute(final String restaurantId, final IfdContext context) {
-        final Promotion promotion =
-            findPromotions.execute(restaurantId, context).singleElement().blockingGet(new Promotion());
-        final Observable<Restaurant> restaurantObservable = restaurantGateway.findById(restaurantId).toObservable();
-        if (promotion != null) {
-            restaurantObservable.flatMapIterable(restaurant -> restaurant.getMenus())
-                .flatMapIterable(menu -> menu.getItems())
-                .flatMap(menuItem -> getMenuItems(menuItem))
-                .subscribe(menuItem -> applyDiscount(menuItem, promotion));
-        }
+        final Observable<Restaurant> restaurantObservable = Observable.create(e -> {
+            Restaurant[] restaurants = new Restaurant[1];
+            restaurantGateway.findById(restaurantId).subscribe(
+                restaurant -> {
+                    restaurants[0] = restaurant;
+                    final Promotion promotion = findPromotions.execute(restaurantId, context).blockingFirst();
+                    Observable.fromIterable(restaurant.getMenus())
+                        .flatMapIterable(menu -> menu.getItems())
+                        .flatMap(menuItem -> getMenuItems(menuItem))
+                        .forEach(menuItem -> applyDiscount(menuItem, promotion));
+                    e.onNext(restaurant);
+                    e.onComplete();
+                },
+                throwable -> e.onError(throwable),
+                () -> {
+                    if (restaurants[0] == null) {
+                        e.onComplete();
+                    }
+                }
+            );
+        });
         return restaurantObservable;
     }
 

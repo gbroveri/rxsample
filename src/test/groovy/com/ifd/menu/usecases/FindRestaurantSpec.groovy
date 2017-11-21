@@ -17,7 +17,7 @@ class FindRestaurantSpec extends Specification {
         given: "there is a menu for restaurant chips_n_burger_1 with 4 items"
           def mock = sampleRestaurant()
           restaurantGateway.findById("chips_n_burger_1") >> Maybe.just(mock)
-          findPromotions.execute(_, _) >> Observable.empty()
+          findPromotions.execute(_, _) >> Observable.just(new Promotion())
         when: "a search by chips_n_burger_1 menus is performed"
           def restaurant = findMenu.execute("chips_n_burger_1", new IfdContext())
         then: "the menu with 4 items is returned"
@@ -100,7 +100,7 @@ class FindRestaurantSpec extends Specification {
           def mock = sampleRestaurant()
           mock.menus = []
           restaurantGateway.findById("chips_n_burger_1") >> Maybe.just(mock)
-          findPromotions.execute(_, _) >> Observable.empty()
+          findPromotions.execute(_, _) >> Observable.just(new Promotion())
         when: "a search is performed by restaurant chips_n_burger_1"
           def restaurant = findMenu.execute("chips_n_burger_1", new IfdContext(voucher: "XPTO"))
         then: "restaurant details is returned without menus"
@@ -114,7 +114,7 @@ class FindRestaurantSpec extends Specification {
     def "find menu from invalid restaurant"() {
         given: "restaurant chips_n_burger_1 does not exist"
           restaurantGateway.findById("chips_n_burger_1") >> Maybe.empty()
-          findPromotions.execute(_, _) >> Observable.empty()
+          findPromotions.execute(_, _) >> Observable.just(new Promotion())
         when: "a search is performed by restaurant chips_n_burger_1"
           def restaurant = findMenu.execute("chips_n_burger_1", new IfdContext(voucher: "XPTO"))
         then: "no restaurant is returned"
