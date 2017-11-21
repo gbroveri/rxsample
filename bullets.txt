@@ -11,9 +11,10 @@
 8. The details on how are the rules to pick items and optionals may impact data modeling.
 9. Discounts must be further detailed with business. For now, it' only possible to have the discount percent effect on all menu items.
 10. The promotion contract may be refined with it's feature team.
-11. It's assumed that promotion takes care of vouchers but it could be handled by it's micro service.
-12. There should be a data model change on items that had promotions applied for tracking/auditing purposes. It' going to be implemented in future releases.
-13. "find menu with day of the week offer applied" scenario was not covered because this case is supposed to be handled by promotions micro service and it's discount is going to be applied transparently by menu.
-14. It's assumed data is consistent on database, so that there are almost no negative scenarios covered (for business rules).
-15. Error handling is still in progress. The proper parser of bundle messages will be implemented on http (gateway) layer.
-16. Specific environment properties are going to be provided latter with devops team.
+11. It's assumed that promotion takes care of vouchers too.
+12. It' assumed that promotions micro service will return the final discount as one single promotion. It more than one promo exists for the restaurant/context variables, it' promotion micro service responsibility to consolidate it.
+13. There should be a data model change on items that had promotions applied for tracking/auditing purposes. It' going to be implemented in future releases.
+14. "find menu with day of the week offer applied" scenario was not covered because this case is supposed to be handled by promotions micro service and it's discount is going to be applied transparently by menu.
+15. It's assumed data is consistent on database, so that there are almost no negative scenarios covered (for business rules).
+16. Error handling is still in progress. The proper parser of bundle messages will be implemented on http (gateway) layer.
+17. Specific environment properties are going to be provided latter with devops team.
