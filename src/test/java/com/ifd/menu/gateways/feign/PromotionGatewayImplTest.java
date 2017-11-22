@@ -1,8 +1,8 @@
 package com.ifd.menu.gateways.feign;
 
 import com.ifd.menu.config.FeignConfiguration;
-import com.ifd.menu.domains.IfdContext;
-import com.ifd.menu.domains.Promotion;
+import com.ifd.menu.domains.promotion.IfdContext;
+import com.ifd.menu.domains.promotion.Promotion;
 import com.ifd.menu.gateways.PromotionGateway;
 import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;

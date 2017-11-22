@@ -1,6 +1,6 @@
 package com.ifd.menu.http;
 
-import com.ifd.menu.domains.IfdContext;
+import com.ifd.menu.domains.promotion.IfdContext;
 import com.ifd.menu.domains.Restaurant;
 import com.ifd.menu.http.error.RestControllerAdvice;
 import com.ifd.menu.usecases.FindRestaurant;

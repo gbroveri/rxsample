@@ -1,11 +1,10 @@
 package com.ifd.menu.http;
 
-import com.ifd.menu.domains.IfdContext;
+import com.ifd.menu.domains.promotion.IfdContext;
 import com.ifd.menu.domains.Restaurant;
 import com.ifd.menu.http.error.NotFoundException;
 import com.ifd.menu.usecases.FindRestaurant;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

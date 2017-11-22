@@ -1,6 +1,8 @@
 package com.ifd.menu.usecases
 
 import com.ifd.menu.domains.*
+import com.ifd.menu.domains.promotion.IfdContext
+import com.ifd.menu.domains.promotion.Promotion
 import com.ifd.menu.gateways.RestaurantGateway
 import io.reactivex.Maybe
 import io.reactivex.Observable

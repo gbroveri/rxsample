@@ -1,6 +1,6 @@
 package com.ifd.menu.gateways.feign;
 
-import com.ifd.menu.domains.Promotion;
+import com.ifd.menu.domains.promotion.Promotion;
 import feign.QueryMap;
 import feign.RequestLine;
 

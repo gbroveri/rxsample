@@ -1,4 +1,4 @@
-package com.ifd.menu.domains;
+package com.ifd.menu.domains.promotion;
 
 import lombok.Getter;
 import lombok.Setter;

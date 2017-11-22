@@ -1,7 +1,7 @@
 package com.ifd.menu.gateways;
 
-import com.ifd.menu.domains.IfdContext;
-import com.ifd.menu.domains.Promotion;
+import com.ifd.menu.domains.promotion.IfdContext;
+import com.ifd.menu.domains.promotion.Promotion;
 import io.reactivex.Observable;
 
 public interface PromotionGateway {

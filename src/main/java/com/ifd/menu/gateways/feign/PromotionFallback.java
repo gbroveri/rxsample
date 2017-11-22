@@ -1,6 +1,6 @@
 package com.ifd.menu.gateways.feign;
 
-import com.ifd.menu.domains.Promotion;
+import com.ifd.menu.domains.promotion.Promotion;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 
