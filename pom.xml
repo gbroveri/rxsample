@@ -28,7 +28,7 @@
         <spock-spring.version>1.0-groovy-2.4</spock-spring.version>
         <lombok.version>1.16.8</lombok.version>
         <feign.version>9.5.1</feign.version>
-        <okhttp3.version>3.6.0</okhttp3.version>
+        <springfox-swagger.verion>2.7.0</springfox-swagger.verion>
     </properties>
 
 
@@ -155,6 +155,20 @@
             <version>3.9.1</version>
             <scope>test</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger.verion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-swagger.verion}</version>
+        </dependency>
+
 
     </dependencies>
 

@@ -4,23 +4,27 @@ import com.ifd.menu.domains.IfdContext;
 import com.ifd.menu.domains.Restaurant;
 import com.ifd.menu.http.error.NotFoundException;
 import com.ifd.menu.usecases.FindRestaurant;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @Slf4j
 @RestController
 @RequestMapping(value = "/restaurants", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
+@Api(value = "restaurants", tags = "rest api for restaurant", produces = APPLICATION_JSON_UTF8_VALUE)
 public class RestaurantController {
     private final FindRestaurant findRestaurant;
 
-    @RequestMapping("/{restaurantId}")
+    @ApiOperation("find restaurant by id")
+    @RequestMapping(value = "/{restaurantId}", method = RequestMethod.GET)
     public DeferredResult<Restaurant> findById(
         @PathVariable final String restaurantId,
         @RequestHeader(value = "uid", required = false) final String uid,
