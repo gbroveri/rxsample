@@ -14,12 +14,12 @@ public class FindRestaurant {
     private final FindPromotions findPromotions;
 
     public Observable<Restaurant> execute(final String restaurantId, final IfdContext context) {
-        final Observable<Restaurant> restaurantObservable = Observable.create(e -> {
+        return Observable.create(e -> {
             Restaurant[] restaurants = new Restaurant[1];
             restaurantGateway.findById(restaurantId).subscribe(
                 restaurant -> {
                     restaurants[0] = restaurant;
-                    final Promotion promotion = findPromotions.execute(restaurantId, context).blockingFirst();
+                    final Promotion promotion = findPromotions.execute(restaurantId, context).blockingSingle();
                     Observable.fromIterable(restaurant.getMenus())
                         .flatMapIterable(menu -> menu.getItems())
                         .flatMap(menuItem -> getMenuItems(menuItem))
@@ -35,7 +35,6 @@ public class FindRestaurant {
                 }
             );
         });
-        return restaurantObservable;
     }
 
     private Observable<MenuItem> getMenuItems(final MenuItem item) {

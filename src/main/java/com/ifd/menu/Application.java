@@ -1,5 +1,6 @@
 package com.ifd.menu;
 
+import com.ifd.menu.domains.Status;
 import com.ifd.menu.gateways.mongo.RestaurantRepository;
 import com.ifd.menu.gateways.mongo.documents.*;
 import io.reactivex.Flowable;
@@ -22,7 +23,6 @@ public class Application {
     CommandLineRunner init(RestaurantRepository restaurantRepository) {
         return args -> restaurantRepository.saveAll(Flowable.just(buildRestaurant())).blockingLast();
     }
-
 
     private RestaurantMongo buildRestaurant() {
         ChainMongo chain = new ChainMongo();
@@ -168,6 +168,7 @@ public class Application {
         regularItemOrange.setId("orange");
         regularItemOrange.setName("Orange");
         regularItemOrange.setPrice(100l);
+        regularItemOrange.setStatus(Status.SOLD_OUT);
 
         RegularItemMongo regularItemLemon = new RegularItemMongo();
         regularItemLemon.setId("lemon");

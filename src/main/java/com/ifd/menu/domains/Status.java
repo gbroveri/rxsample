@@ -1,5 +1,5 @@
 package com.ifd.menu.domains;
 
 public enum Status {
-    AVAILABLE, UNAVAILABLE
+    AVAILABLE, SOLD_OUT
 }

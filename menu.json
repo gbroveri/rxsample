@@ -1,147 +1,233 @@
 {
-  "restaurant": {
-    "id": "chips_n_burger_1",
-    "chain": "chips n burgers",
-    "name": "chips n burgers campinas mall 1",
-    "menus": [
-      {
-        "name": "fast food menu",
-        "items": [
-          {
-            "type": "regular",
-            "name": "Chips",
-            "price": 400,
-            "optionals": [
+  "id": "chips_n_burger_1",
+  "name": "chips n burgers campinas mall 1",
+  "chain": {
+    "id": "chips_n_burgers",
+    "name": "chips n burgers",
+    "menus": []
+  },
+  "menus": [
+    {
+      "id": "fast_food_menu",
+      "name": "fast food menu",
+      "items": [
+        {
+          "id": "chips",
+          "name": "Chips",
+          "price": 400,
+          "pickOptionals": {
+            "id": "chips_optionals",
+            "name": "Chips adds",
+            "pick": 1,
+            "options": [
               {
+                "id": "bacon",
                 "name": "Bacon",
                 "price": 100,
-                "group": "chips adds"
+                "status": "AVAILABLE"
               }
             ]
           },
-          {
-            "type": "regular",
-            "name": "Cola",
-            "price": 300
-          },
-          {
-            "type": "regular",
-            "name": "Double Cheese Burger",
-            "price": 1200,
-            "optionals": [
+          "pickItems": null,
+          "status": "AVAILABLE"
+        },
+        {
+          "id": "cola",
+          "name": "Cola",
+          "price": 300,
+          "pickOptionals": null,
+          "pickItems": null,
+          "status": "AVAILABLE"
+        },
+        {
+          "id": "double_cheese_burger",
+          "name": "Double Cheese Burger",
+          "price": 1200,
+          "pickOptionals": {
+            "id": "burger_optionals",
+            "name": "Burger optionals",
+            "pick": 2,
+            "options": [
               {
+                "id": "salad",
                 "name": "Salad",
                 "price": 0,
-                "group": "sandwich adds"
+                "status": "AVAILABLE"
               },
               {
+                "id": "extra_burger",
                 "name": "Extra burger",
                 "price": 300,
-                "group": "sandwich adds"
+                "status": "AVAILABLE"
               },
               {
+                "id": "bacon",
                 "name": "Bacon",
-                "price": 200,
-                "group": "sandwich adds"
+                "price": 100,
+                "status": "AVAILABLE"
               }
             ]
           },
-          {
-            "type": "combo",
-            "name": "Combo 5",
-            "price": 1700,
-            "items": [
-              {
-                "name": "Double Cheese Burger",
-                "price": 1200,
-                "optionals": [
+          "pickItems": null,
+          "status": "AVAILABLE"
+        },
+        {
+          "id": "combo_5",
+          "name": "Combo 5",
+          "price": 1700,
+          "items": [
+            {
+              "id": "double_cheese_burger",
+              "name": "Double Cheese Burger",
+              "price": 1200,
+              "pickOptionals": {
+                "id": "burger_optionals",
+                "name": "Burger optionals",
+                "pick": 2,
+                "options": [
                   {
+                    "id": "salad",
                     "name": "Salad",
                     "price": 0,
-                    "group": "sandwich adds"
+                    "status": "AVAILABLE"
                   },
                   {
+                    "id": "extra_burger",
                     "name": "Extra burger",
                     "price": 300,
-                    "group": "sandwich adds"
+                    "status": "AVAILABLE"
                   },
                   {
+                    "id": "bacon",
                     "name": "Bacon",
-                    "price": 200,
-                    "group": "sandwich adds"
+                    "price": 100,
+                    "status": "AVAILABLE"
                   }
                 ]
               },
-              {
-                "type": "group",
+              "pickItems": null,
+              "status": "AVAILABLE"
+            },
+            {
+              "id": "side_dish",
+              "name": "Side dish",
+              "price": 0,
+              "pickOptionals": null,
+              "pickItems": {
+                "id": "side_dish_group",
                 "name": "Side dish",
-                "price": 0,
                 "pick": 1,
                 "items": [
                   {
-                    "type": "regular",
+                    "id": "onion_rings",
                     "name": "Onion rings",
-                    "price": 100
+                    "price": 100,
+                    "pickOptionals": null,
+                    "pickItems": null,
+                    "status": "AVAILABLE"
                   },
                   {
-                    "type": "regular",
-                    "name": "chips",
-                    "price": 0,
-                    "optionals": [
-                      {
-                        "name": "Bacon",
-                        "price": 100,
-                        "group": "chips adds"
-                      }
-                    ]
+                    "id": "chips",
+                    "name": "Chips",
+                    "price": 400,
+                    "pickOptionals": {
+                      "id": "chips_optionals",
+                      "name": "Chips adds",
+                      "pick": 1,
+                      "options": [
+                        {
+                          "id": "bacon",
+                          "name": "Bacon",
+                          "price": 100,
+                          "status": "AVAILABLE"
+                        }
+                      ]
+                    },
+                    "pickItems": null,
+                    "status": "AVAILABLE"
                   }
                 ]
               },
-              {
-                "type": "group",
+              "status": "AVAILABLE"
+            },
+            {
+              "id": "beverage_group",
+              "name": "Beverage",
+              "price": 0,
+              "pickOptionals": null,
+              "pickItems": {
+                "id": "beverage_group",
                 "name": "Beverage",
-                "price": 0,
                 "pick": 1,
                 "items": [
                   {
-                    "type": "group",
+                    "id": "soda",
                     "name": "Soda",
-                    "items": [
-                      {
-                        "name": "Cola",
-                        "type": "regular",
-                        "price": 0
-                      },
-                      {
-                        "name": "Dr Pepper",
-                        "type": "regular",
-                        "price": 0
-                      }
-                    ]
+                    "price": 0,
+                    "pickOptionals": null,
+                    "pickItems": {
+                      "id": "soda_group",
+                      "name": "Soda",
+                      "pick": 1,
+                      "items": [
+                        {
+                          "id": "cola",
+                          "name": "Cola",
+                          "price": 0,
+                          "pickOptionals": null,
+                          "pickItems": null,
+                          "status": "AVAILABLE"
+                        },
+                        {
+                          "id": "dr_pepper",
+                          "name": "Dr Pepper",
+                          "price": 0,
+                          "pickOptionals": null,
+                          "pickItems": null,
+                          "status": "AVAILABLE"
+                        }
+                      ]
+                    },
+                    "status": "AVAILABLE"
                   },
                   {
-                    "type": "group",
+                    "id": "juice",
                     "name": "Juice",
                     "price": 100,
-                    "items": [
-                      {
-                        "name": "Orange",
-                        "type": "regular",
-                        "price": 100
-                      },
-                      {
-                        "name": "Lemon",
-                        "type": "regular",
-                        "price": 100
-                      }
-                    ]
+                    "pickOptionals": null,
+                    "pickItems": {
+                      "id": "juice_group",
+                      "name": "Juice",
+                      "pick": 1,
+                      "items": [
+                        {
+                          "id": "orange",
+                          "name": "Orange",
+                          "price": 100,
+                          "pickOptionals": null,
+                          "pickItems": null,
+                          "status": "SOLD_OUT"
+                        },
+                        {
+                          "id": "lemon",
+                          "name": "Lemon",
+                          "price": 100,
+                          "pickOptionals": null,
+                          "pickItems": null,
+                          "status": "AVAILABLE"
+                        }
+                      ]
+                    },
+                    "status": "AVAILABLE"
                   }
                 ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+              },
+              "status": "AVAILABLE"
+            }
+          ],
+          "status": "AVAILABLE"
+        }
+      ]
+    }
+  ]
 }
