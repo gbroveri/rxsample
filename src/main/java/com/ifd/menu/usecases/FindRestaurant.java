@@ -19,13 +19,15 @@ public class FindRestaurant {
         return Observable.combineLatest(
             restaurantGateway.findById(restaurantId).toObservable(),
             findPromotions.execute(restaurantId, context),
-            (restaurant, promotion) -> {
-                Observable.fromIterable(restaurant.getMenus())
-                    .flatMapIterable(menu -> menu.getItems())
-                    .flatMap(menuItem -> getMenuItems(menuItem))
-                    .forEach(menuItem -> applyDiscount(menuItem, promotion));
-                return restaurant;
-            });
+            (restaurant, promotion) -> applyPromotion(restaurant, promotion));
+    }
+
+    private Restaurant applyPromotion(final Restaurant restaurant, final Promotion promotion) {
+        Observable.fromIterable(restaurant.getMenus())
+            .flatMapIterable(menu -> menu.getItems())
+            .flatMap(menuItem -> getMenuItems(menuItem))
+            .forEach(menuItem -> applyDiscount(menuItem, promotion));
+        return restaurant;
     }
 
     private Observable<MenuItem> getMenuItems(final MenuItem item) {
