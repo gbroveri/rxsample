@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class RestaurantControllerTests {
+public class RestaurantControllerTest {
     private MockMvc mvc;
     private RestaurantController controller;
 
