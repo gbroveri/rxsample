@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class ItemGroup {
+public class ItemGroup implements Serializable {
     private String id;
     private String name;
     private int pick;

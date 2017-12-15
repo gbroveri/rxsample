@@ -11,7 +11,7 @@ import java.util.Collection;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Restaurant implements Serializable{
+public class Restaurant implements Serializable {
     private String id;
     private String name;
     private Chain chain;

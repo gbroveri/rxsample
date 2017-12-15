@@ -12,12 +12,19 @@ import java.util.Collection;
 
 public class RestaurantConverter {
 
+    public static final String MENUS_PROP = "menus";
+    public static final String ITEMS_PROP = "items";
+
+    private RestaurantConverter() {
+        //
+    }
+
     public static Converter<Maybe<RestaurantMongo>, Maybe<Restaurant>> newConverter() {
         return restaurantMongoMaybe -> restaurantMongoMaybe.map(restaurantMongo -> {
             final Restaurant restaurant = new Restaurant();
             final Collection<Menu> menus = new ArrayList<>();
             restaurant.setMenus(menus);
-            BeanUtils.copyProperties(restaurantMongo, restaurant, "menus");
+            BeanUtils.copyProperties(restaurantMongo, restaurant, MENUS_PROP);
             Observable.fromIterable(restaurantMongo.getMenus())
                 .subscribe(menuMongo -> menus.add(menuConverter().convert(menuMongo)));
             if (restaurantMongo.getChain() != null) {
@@ -32,7 +39,7 @@ public class RestaurantConverter {
             final Chain chain = new Chain();
             final Collection<Menu> menus = new ArrayList<>();
             chain.setMenus(menus);
-            BeanUtils.copyProperties(chainMongo, chain, "menus");
+            BeanUtils.copyProperties(chainMongo, chain, MENUS_PROP);
             if (chainMongo.getMenus() != null) {
                 Observable.fromIterable(chainMongo.getMenus())
                     .subscribe(menuMongo -> menus.add(menuConverter().convert(menuMongo)));
@@ -46,7 +53,7 @@ public class RestaurantConverter {
             final Menu menu = new Menu();
             final Collection<MenuItem> menuItems = new ArrayList<>();
             menu.setItems(menuItems);
-            BeanUtils.copyProperties(menuMongo, menu, "items");
+            BeanUtils.copyProperties(menuMongo, menu, ITEMS_PROP);
             Observable.fromIterable(menuMongo.getItems())
                 .subscribe(itemMongo -> menuItems.add(menuItemConverter().convert(itemMongo)));
             return menu;
@@ -68,7 +75,7 @@ public class RestaurantConverter {
             final Combo combo = new Combo();
             final Collection<RegularItem> regularItems = new ArrayList<>();
             combo.setItems(regularItems);
-            BeanUtils.copyProperties(comboMongo, combo, "items");
+            BeanUtils.copyProperties(comboMongo, combo, ITEMS_PROP);
             Observable.fromIterable(comboMongo.getItems())
                 .subscribe(regularItemMongo -> regularItems.add(regularItemConverter().convert(regularItemMongo)));
             return combo;
@@ -99,7 +106,7 @@ public class RestaurantConverter {
             final ItemGroup itemGroup = new ItemGroup();
             final Collection<RegularItem> regularItems = new ArrayList<>();
             itemGroup.setItems(regularItems);
-            BeanUtils.copyProperties(itemGroupMongo, itemGroup, "items");
+            BeanUtils.copyProperties(itemGroupMongo, itemGroup, ITEMS_PROP);
             Observable.fromIterable(itemGroupMongo.getItems())
                 .subscribe(regularItemMongo -> regularItems.add(regularItemConverter().convert(regularItemMongo)));
             return itemGroup;

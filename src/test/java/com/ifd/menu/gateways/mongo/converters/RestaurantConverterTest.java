@@ -14,18 +14,18 @@ public class RestaurantConverterTest {
     public void testOptionConverter() {
         final OptionMongo optionMongo = buildOptionMongo();
         Option option = RestaurantConverter.optionConverter().convert(optionMongo);
-        Assert.assertSame(option.getPrice(), 100l);
-        Assert.assertEquals(option.getId(), "bacon");
-        Assert.assertEquals(option.getName(), "Bacon");
+        Assert.assertSame(100l, option.getPrice());
+        Assert.assertEquals("bacon", option.getId());
+        Assert.assertEquals("Bacon", option.getName());
     }
 
     @Test
     public void testOptionGroupConverter() {
         final OptionGroupMongo optionGroupMongo = buildOptionGroupMongo();
         OptionGroup optionGroup = RestaurantConverter.optionGroupConverter().convert(optionGroupMongo);
-        Assert.assertSame(optionGroup.getPick(), 1);
-        Assert.assertEquals(optionGroup.getId(), "chips_optionals");
-        Assert.assertEquals(optionGroup.getName(), "Chips Optional");
+        Assert.assertSame(1, optionGroup.getPick());
+        Assert.assertEquals("chips_optionals", optionGroup.getId());
+        Assert.assertEquals("Chips Optional", optionGroup.getName());
         Assert.assertTrue(optionGroup.getOptions().size() == 1);
     }
 
@@ -33,9 +33,9 @@ public class RestaurantConverterTest {
     public void testItemGroupConverter() {
         final ItemGroupMongo itemGroupMongo = buildItemGroupMongo();
         ItemGroup itemGroup = RestaurantConverter.itemGroupConverter().convert(itemGroupMongo);
-        Assert.assertSame(itemGroup.getPick(), 2);
-        Assert.assertEquals(itemGroup.getId(), "side_dish_group");
-        Assert.assertEquals(itemGroup.getName(), "Side dish");
+        Assert.assertSame(2, itemGroup.getPick());
+        Assert.assertEquals("side_dish_group", itemGroup.getId());
+        Assert.assertEquals("Side dish", itemGroup.getName());
         Assert.assertTrue(itemGroup.getItems().size() == 1);
         Assert.assertTrue(itemGroup.getItems().iterator().next().getPickOptionals().getPick() == 1);
     }
@@ -43,9 +43,9 @@ public class RestaurantConverterTest {
     @Test
     public void testRegularItemConverter() {
         RegularItem regularItem = RestaurantConverter.regularItemConverter().convert(buildRegularItemMongo());
-        Assert.assertSame(regularItem.getPrice(), 0l);
-        Assert.assertEquals(regularItem.getId(), "chips");
-        Assert.assertEquals(regularItem.getName(), "Chips");
+        Assert.assertSame(0l, regularItem.getPrice());
+        Assert.assertEquals("chips", regularItem.getId());
+        Assert.assertEquals("Chips", regularItem.getName());
         Assert.assertTrue(regularItem.getPickOptionals().getOptions().size() == 1);
     }
 
@@ -53,9 +53,9 @@ public class RestaurantConverterTest {
     public void testComboConverter() {
         final ComboMongo comboMongo = buildComboMongo();
         Combo combo = RestaurantConverter.comboConverter().convert(comboMongo);
-        Assert.assertEquals(combo.getPrice(), Long.valueOf(1700l));
-        Assert.assertEquals(combo.getId(), "combo5");
-        Assert.assertEquals(combo.getName(), "Combo 5");
+        Assert.assertEquals(Long.valueOf(1700l), combo.getPrice());
+        Assert.assertEquals("combo5", combo.getId());
+        Assert.assertEquals("Combo 5", combo.getName());
         Assert.assertTrue(combo.getItems().size() == 1);
     }
 
@@ -77,8 +77,8 @@ public class RestaurantConverterTest {
     public void testMenuConverter() {
         final MenuMongo menuMongo = buildMenuMongo();
         final Menu menu = RestaurantConverter.menuConverter().convert(menuMongo);
-        Assert.assertEquals(menu.getId(), "fast_food_menu");
-        Assert.assertEquals(menu.getName(), "Fast Food Menu");
+        Assert.assertEquals("fast_food_menu", menu.getId());
+        Assert.assertEquals("Fast Food Menu", menu.getName());
         Assert.assertTrue(menu.getItems().size() == 1);
     }
 
@@ -88,8 +88,8 @@ public class RestaurantConverterTest {
         chainMongo.setId("chips_n_burgers");
         chainMongo.setName("chips n burgers");
         Chain chain = RestaurantConverter.chainConverter().convert(chainMongo);
-        Assert.assertEquals(chain.getId(), "chips_n_burgers");
-        Assert.assertEquals(chain.getName(), "chips n burgers");
+        Assert.assertEquals("chips_n_burgers", chain.getId());
+        Assert.assertEquals("chips n burgers", chain.getName());
     }
 
     @Test
@@ -102,8 +102,8 @@ public class RestaurantConverterTest {
         restaurantMongo.setMenus(Arrays.asList(buildMenuMongo()));
         Restaurant restaurant =
             RestaurantConverter.newConverter().convert(Maybe.just(restaurantMongo)).test().values().get(0);
-        Assert.assertEquals(restaurant.getId(), "burger_n_chips");
-        Assert.assertEquals(restaurant.getName(), "burger n chips");
+        Assert.assertEquals("burger_n_chips", restaurant.getId());
+        Assert.assertEquals("burger n chips", restaurant.getName());
         Assert.assertTrue(restaurant.getMenus().size() == 1);
     }
 

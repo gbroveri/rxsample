@@ -39,7 +39,7 @@ public class RestaurantController {
         findRestaurant.execute(restaurantId, ifdContext)
             .subscribe(
                 restaurant -> result[0] = restaurant,
-                error -> deferredResult.setErrorResult(error),
+                deferredResult::setErrorResult,
                 () -> {
                     final Restaurant restaurant = result[0];
                     if (restaurant != null) {

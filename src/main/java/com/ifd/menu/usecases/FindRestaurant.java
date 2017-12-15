@@ -28,19 +28,23 @@ public class FindRestaurant {
         getItemStrategies = Stream.of(
             new AbstractMap.SimpleEntry<>(RegularItem.class, new GetRegularItem()),
             new AbstractMap.SimpleEntry<>(Combo.class, new GetComboItem()))
-            .collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()));
+            .collect(
+                Collectors.toMap(
+                    AbstractMap.SimpleEntry::getKey,
+                    AbstractMap.SimpleEntry::getValue
+                ));
     }
 
     public Observable<Restaurant> execute(final String restaurantId, final IfdContext context) {
         return Observable.combineLatest(
             restaurantGateway.findById(restaurantId).toObservable(),
             findPromotions.execute(restaurantId, context),
-            (restaurant, promotion) -> applyPromotion(restaurant, promotion));
+            this::applyPromotion);
     }
 
     private Restaurant applyPromotion(final Restaurant restaurant, final Promotion promotion) {
         Observable.fromIterable(restaurant.getMenus())
-            .flatMapIterable(menu -> menu.getItems())
+            .flatMapIterable(Menu::getItems)
             .flatMap(menuItem -> getItemStrategies.get(menuItem.getClass()).getMenuItems(menuItem))
             .forEach(menuItem -> applyDiscount((MenuItem) menuItem, promotion));
         return restaurant;
